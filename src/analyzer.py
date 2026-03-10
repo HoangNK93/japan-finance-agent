@@ -38,6 +38,7 @@ Hãy phân tích và trả về JSON với cấu trúc sau:
       "title_jp": "Tên topic (tiếng Nhật)",
       "category": "macro|micro",
       "urgency": "high|medium|low",
+      "explanation_vi": "1 câu giải thích đơn giản chủ đề này là gì bằng tiếng Việt (dành cho người chưa biết)",
       "why_trending": "Giải thích ngắn tại sao topic này đang hot",
       "video_angle": "Góc độ làm video độc đáo cho kênh kinh tế",
       "suggested_title": "Gợi ý tiêu đề YouTube hấp dẫn (tiếng Nhật hoặc Việt)",

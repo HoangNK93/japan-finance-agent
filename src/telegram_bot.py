@@ -78,6 +78,7 @@ class TelegramBot:
             topics_msg += f"""{emoji} <b>#{topic['rank']} — {topic['title']}</b>
 {cat_emoji} {category.upper()} | Độ hot: <b>{urgency.upper()}</b>
 🇯🇵 <i>{topic.get('title_jp', '')}</i>
+📖 {topic.get('explanation_vi', '—')}
 
 💬 <b>Tại sao trending:</b> {topic.get('why_trending', '—')}
 
