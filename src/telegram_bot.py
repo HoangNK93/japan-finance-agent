@@ -80,9 +80,9 @@ class TelegramBot:
 🇯🇵 <i>{topic.get('title_jp', '')}</i>
 📖 {topic.get('explanation_vi', '—')}
 
-💬 <b>Tại sao trending:</b> {topic.get('why_trending', '—')}
-
-🎬 <b>Góc làm video:</b> {topic.get('video_angle', '—')}
+💬 <b>Phân tích & góc video:</b>
+{topic.get('why_trending', '—')}
+🎬 {topic.get('video_angle', '—')}
 
 ✍️ <b>Gợi ý tiêu đề:</b>
 <code>{topic.get('suggested_title', '—')}</code>
@@ -91,10 +91,6 @@ class TelegramBot:
 
             for point in topic.get("key_points", [])[:3]:
                 topics_msg += f"\n  • {point}"
-
-            sources = topic.get("sources", [])
-            if sources:
-                topics_msg += f"\n\n📰 Nguồn: {', '.join(sources)}"
 
             topics_msg += f"\n\n{'─' * 25}\n\n"
 
