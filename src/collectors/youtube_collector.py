@@ -49,6 +49,8 @@ class YouTubeCollector:
                     },
                 )
                 data = resp.json()
+                if "error" in data:
+                    logger.warning(f"YouTube trending API error: {data['error'].get('message')}")
                 for item in data.get("items", []):
                     snippet = item["snippet"]
                     stats = item.get("statistics", {})

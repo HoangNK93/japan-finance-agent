@@ -55,7 +55,7 @@ Hãy phân tích và trả về JSON với cấu trúc sau:
 Chỉ trả về JSON, không có text thêm. Top 5 topics quan trọng nhất."""
 
         try:
-            async with httpx.AsyncClient(timeout=60) as client:
+            async with httpx.AsyncClient(timeout=120) as client:
                 resp = await client.post(
                     CLAUDE_API_URL,
                     headers={
