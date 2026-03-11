@@ -65,7 +65,7 @@ Chỉ trả về JSON, không có text thêm. Top 5 topics quan trọng nhất."
                     },
                     json={
                         "model": MODEL,
-                        "max_tokens": 4096,
+                        "max_tokens": 8192,
                         "messages": [{"role": "user", "content": prompt}],
                     },
                 )

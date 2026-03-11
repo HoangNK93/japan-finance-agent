@@ -1,5 +1,5 @@
 """
-RSS Collector - Nikkei, Bloomberg Japan, BOJ, Reuters Japan
+RSS Collector - Nikkei, Bloomberg Japan, BOJ, NHK, Japan Times
 Fetches latest economic/financial news articles
 """
 
@@ -20,13 +20,13 @@ RSS_FEEDS = [
         "category": "macro",
     },
     {
-        "name": "Reuters Japan - Economy",
-        "url": "https://feeds.reuters.com/reuters/JPeconomicsNews",
+        "name": "NHK World - Economy",
+        "url": "https://www3.nhk.or.jp/nhkworld/en/news/feeds/economy/",
         "category": "macro",
     },
     {
-        "name": "Reuters Japan - Business",
-        "url": "https://feeds.reuters.com/reuters/JPbusinessNews",
+        "name": "Japan Times - Business",
+        "url": "https://www.japantimes.co.jp/news/business/feed/",
         "category": "micro",
     },
     {
