@@ -11,7 +11,12 @@ import logging
 logger = logging.getLogger(__name__)
 
 URGENCY_EMOJI = {"high": "🔥", "medium": "📊", "low": "💡"}
-CATEGORY_EMOJI = {"macro": "🌐", "micro": "🏢"}
+CATEGORY_EMOJI = {
+    "japan": "🇯🇵", "global": "🌐", "us": "🇺🇸", "china": "🇨🇳",
+    "geopolitics": "⚔️", "markets": "📈",
+    # legacy
+    "macro": "🌐", "micro": "🏢",
+}
 
 
 class TelegramBot:
@@ -67,30 +72,40 @@ class TelegramBot:
             messages.append("❌ Không có topic nào được tìm thấy hôm nay.")
             return messages
 
-        topics_msg = f"🎯 <b>Top Topics để làm video hôm nay</b>\n{'─' * 30}\n\n"
+        topics_msg = f"🎯 <b>本日のホットトピック Top 2</b>\n{'─' * 30}\n\n"
 
-        for topic in topics[:5]:
+        for topic in topics[:2]:
             urgency = topic.get("urgency", "medium")
             category = topic.get("category", "macro")
             emoji = URGENCY_EMOJI.get(urgency, "📊")
             cat_emoji = CATEGORY_EMOJI.get(category, "📊")
 
-            topics_msg += f"""{emoji} <b>#{topic['rank']} — {topic['title']}</b>
-{cat_emoji} {category.upper()} | Độ hot: <b>{urgency.upper()}</b>
-🇯🇵 <i>{topic.get('title_jp', '')}</i>
-📖 {topic.get('explanation_vi', '—')}
+            flag = topic.get("country_flag", "")
+            topics_msg += f"""{emoji} <b>#{topic['rank']} {flag} — {topic['title']}</b>
+{cat_emoji} {category.upper()} | 緊急度: <b>{urgency.upper()}</b>
 
-💬 <b>Phân tích & góc video:</b>
+💬 <b>なぜ今重要か:</b>
 {topic.get('why_trending', '—')}
 🎬 {topic.get('video_angle', '—')}
 
-✍️ <b>Gợi ý tiêu đề:</b>
+✍️ <b>推奨タイトル:</b>
 <code>{topic.get('suggested_title', '—')}</code>
 
 📝 <b>Key points:</b>"""
 
             for point in topic.get("key_points", [])[:3]:
                 topics_msg += f"\n  • {point}"
+
+            if topic.get("japan_connection"):
+                topics_msg += f"\n\n🇯🇵 <b>日本への影響:</b> {topic['japan_connection']}"
+
+            if topic.get("thumbnail_number"):
+                topics_msg += f"\n📸 <b>Thumbnail数字:</b> <code>{topic['thumbnail_number']}</code>"
+
+            if topic.get("shorts_hooks") and topic.get("rank") == 1:
+                topics_msg += f"\n\n📱 <b>Shorts ideas (60秒):</b>"
+                for hook in topic["shorts_hooks"][:3]:
+                    topics_msg += f"\n  ▶ {hook}"
 
             topics_msg += f"\n\n{'─' * 25}\n\n"
 

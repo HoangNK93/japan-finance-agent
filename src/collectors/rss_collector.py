@@ -49,6 +49,31 @@ RSS_FEEDS = [
         "url": "https://toyokeizai.net/list/feed/rss",
         "category": "macro",
     },
+    # International sources
+    {
+        "name": "Financial Times",
+        "url": "https://www.ft.com/rss/home",
+        "category": "global",
+        "skip_finance_filter": True,
+    },
+    {
+        "name": "BBC Japan",
+        "url": "https://feeds.bbci.co.uk/japanese/rss.xml",
+        "category": "global",
+        "skip_finance_filter": True,
+    },
+    {
+        "name": "The Economist",
+        "url": "https://www.economist.com/finance-and-economics/rss.xml",
+        "category": "global",
+        "skip_finance_filter": True,
+    },
+    {
+        "name": "NYT Business",
+        "url": "https://rss.nytimes.com/services/xml/rss/nyt/Business.xml",
+        "category": "global",
+        "skip_finance_filter": True,
+    },
 ]
 
 FINANCE_KEYWORDS_JA = [
@@ -92,8 +117,9 @@ class RSSCollector:
                         if pub_date and pub_date < cutoff:
                             continue
 
-                        # Finance filter (skip for finance-specific feeds)
-                        if feed_config["name"] not in ["Nikkei", "Bank of Japan", "Bloomberg Japan"]:
+                        # Finance filter (skip for finance-specific or international feeds)
+                        if not feed_config.get("skip_finance_filter") and \
+                                feed_config["name"] not in ["Nikkei", "Bank of Japan", "Bloomberg Japan"]:
                             if not is_finance_related(title, summary):
                                 continue
 
